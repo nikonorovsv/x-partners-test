@@ -1,0 +1,42 @@
+<?php
+
+add_action( 'init', function () {
+    register_post_type( 'city', [
+        'label'  => null,
+        'labels' => [
+            'name'               => __( 'Города', THEME_TEXT_PREFIX ),
+            'singular_name'      => __( 'Город', THEME_TEXT_PREFIX ),
+            'add_new'            => __( 'Добавить город', THEME_TEXT_PREFIX ),
+            'add_new_item'       => __( 'Добавление города', THEME_TEXT_PREFIX ),
+            'edit_item'          => __( 'Редактирование города', THEME_TEXT_PREFIX ),
+            'new_item'           => __( 'Новый город', THEME_TEXT_PREFIX ),
+            'view_item'          => __( 'Просмотреть город', THEME_TEXT_PREFIX ),
+            'search_items'       => __( 'Найти город', THEME_TEXT_PREFIX ),
+            'not_found'          => __( 'Городов не найдено', THEME_TEXT_PREFIX ),
+            'not_found_in_trash' => __( 'Нет удалённых городов', THEME_TEXT_PREFIX ),
+            'parent_item_colon'  => '',
+            'menu_name'          => __( 'Города', THEME_TEXT_PREFIX ),
+        ],
+        'description'            => __( 'Тип записи для городов', THEME_TEXT_PREFIX ),
+        'public'                 => true,
+        // 'publicly_queryable'  => null,
+        // 'exclude_from_search' => null,
+        // 'show_ui'             => null,
+        // 'show_in_nav_menus'   => null,
+        'show_in_menu'           => null,
+        // 'show_in_admin_bar'   => null,
+        'show_in_rest'        => null,
+        'rest_base'           => null,
+        'menu_position'       => null,
+        'menu_icon'           => null,
+        //'capability_type'   => 'post',
+        //'capabilities'      => 'post',
+        //'map_meta_cap'      => null,
+        'hierarchical'        => false,
+        'supports'            => [ 'title', 'editor', 'thumbnail' ],
+        'taxonomies'          => [],
+        'has_archive'         => false,
+        'rewrite'             => true,
+        'query_var'           => true,
+    ] );
+});
