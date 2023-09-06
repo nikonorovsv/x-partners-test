@@ -1,0 +1,24 @@
+{
+  "name": "x-partners/real-estate",
+  "type": "library",
+  "description": "Theme for uraydev.com",
+  "keywords": ["wordpress"],
+  "homepage": "https://uraydev.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sergey Nikonorov",
+      "email": "nikonorovsv@gmail.com",
+      "homepage": "https://uraydev.com",
+      "role": "WordPress Developer"
+    }
+  ],
+  "require": {
+    "php": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "theme\\": "inc/"
+    }
+  }
+}
