@@ -12,7 +12,7 @@ trait Cache
 {
 
     /**
-     * This method is save your code result in Cache
+     * This method is saved your code result in Cache
      * and will return result from Cache if that exists.
      * It's final method because we get information about
      * call chain from debug_backtrace() PHP function.
