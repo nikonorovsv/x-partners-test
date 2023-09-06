@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Marmelad&display=swap&subset=cyrillic');
+
+body {
+  background-repeat: repeat;
+  // background-attachment: fixed;
+  // background-size: 100%;
+  background-color: #fffffe;
+}
+
+::selection,
+::-moz-selection {
+  background-color: red;
+  color: white;
+}
+
