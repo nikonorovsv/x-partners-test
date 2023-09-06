@@ -1,0 +1,6 @@
+.idea
+assets
+vendor
+composer.lock
+frontend/node_modules
+frontend/package-lock.json
