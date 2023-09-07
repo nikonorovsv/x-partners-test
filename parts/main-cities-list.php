@@ -2,29 +2,21 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$cities = get_cities();
+
 ?>
 
 <div class="row">
     <?php
 
-    $objects = new WP_Query([
-        'post_type'      => 'city',
-        'post_status'    => 'publish',
-        'posts_per_page' => 6,
-    ]);
-
-    while ($objects->have_posts()) {
-        $objects->the_post(); ?>
+    foreach ($cities as $city) { ?>
 
         <div class="col-md-2 col-sm-4">
-            <?php get_template_part('parts/city', 'card'); ?>
+            <?= render( 'city-card', $city ) ?>
         </div>
 
         <?php
-    }
-    wp_reset_postdata();
-
-    ?>
+    } ?>
 </div>
 
 

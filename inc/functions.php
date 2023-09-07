@@ -132,8 +132,9 @@ function get_cities(): array
         }
 
         $cities[] = [
-            'name' => get_the_title( $cityId ),
-            'url' => get_permalink( $cityId ),
+            'id'    => $cityId,
+            'name'  => get_the_title( $cityId ),
+            'url'   => get_permalink( $cityId ),
             'count' => $count
         ];
     }
