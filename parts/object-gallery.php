@@ -4,7 +4,15 @@ defined( 'ABSPATH' ) || exit;
 
 global $post;
 
-$images = get_field( 'gallery', $post->ID ); ?>
+$images = get_field( 'gallery', $post->ID );
+
+if (empty($images)) {
+    echo '<p>Изображения не загружены.</p>';
+
+    return;
+}
+
+?>
 
 <div id="object-gallery" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -28,10 +36,14 @@ $images = get_field( 'gallery', $post->ID ); ?>
     </div>
     <a class="carousel-control-prev" href="#object-gallery" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <span class="sr-only">
+            <?= __( 'Предыдущая', THEME_TEXT_PREFIX ) ?>
+        </span>
     </a>
     <a class="carousel-control-next" href="#object-gallery" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+        <span class="sr-only">
+            <?= __( 'Следующая', THEME_TEXT_PREFIX ) ?>
+        </span>
     </a>
 </div>

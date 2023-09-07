@@ -8,7 +8,7 @@ global $post;
 
 <div class="card mb-4">
     <figure class="card-img-top">
-        <?= get_the_post_thumbnail($post, 'medium', ['class' => 'w-100']) ?>
+        <?= get_object_thumbnail($post->ID, 'medium', ['class' => 'w-100']) ?>
     </figure>
     <div class="card-body">
         <h5 class="card-title">

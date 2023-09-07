@@ -15,7 +15,7 @@ global $post;
     </header><!-- .entry-header -->
 
     <figure class="my-5">
-        <?= get_the_post_thumbnail( $post->ID, 'large', ['class' => 'img-thumbnail w-100'] ); ?>
+        <?= get_object_thumbnail( $post->ID, 'large', ['class' => 'img-thumbnail w-100'] ); ?>
     </figure>
 
     <div class="entry-content">
