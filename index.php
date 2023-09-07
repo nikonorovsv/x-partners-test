@@ -55,7 +55,10 @@ $container = get_theme_mod( 'understrap_container_type' );
                         </h2>
                     </header>
 
-                    <?php get_template_part('parts/main', 'form'); ?>
+                    // Импровизированная рендер функция, можно передавать параметры явно
+                    <?= render('main-form', [
+                        'nonce' => wp_create_nonce()
+                    ]); ?>
                 </section>
             </main>
 

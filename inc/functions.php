@@ -48,7 +48,7 @@ function renderCache(string $template, array $props = []): string
 function render(string $template, array $data = []): string
 {
     $template = trim($template, '/');
-    $file = get_theme_file_path("templates/$template.php");
+    $file = get_theme_file_path("parts/$template.php");
     if (!file_exists($file)) {
         return '';
     }
