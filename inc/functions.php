@@ -1,5 +1,7 @@
 <?php
 
+use \theme\helpers\Html;
+
 /**
  * @param array|null $conf
  *
@@ -142,4 +144,18 @@ function get_cities(): array
     usort( $cities, fn( $a, $b ) => ( $b['count'] - $a['count'] ) );
 
     return $cities;
+}
+
+/**
+ * @param int $postId
+ * @param string $size
+ * @param array $atts
+ * @return string
+ */
+function get_object_thumbnail( int $postId, string $size = 'large', array $atts = [] ): string {
+    if ( has_post_thumbnail( $postId ) ) {
+        return get_the_post_thumbnail( $postId, $size, $atts);
+    }
+
+    return Html::img('https://placehold.jp/600x400.png', $atts);
 }
