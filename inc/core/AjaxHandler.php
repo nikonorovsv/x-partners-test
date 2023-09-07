@@ -3,6 +3,7 @@
 namespace theme\core;
 
 use theme\helpers\WPErrors;
+use theme\helpers\WP;
 
 /**
  * Abstract Class AjaxHandler
@@ -168,11 +169,13 @@ abstract class AjaxHandler
      */
     private function setQueryVars(): void
     {
-        if (empty($_POST['data']) || !is_string($_POST['data'])) {
-            return;
-        }
+        foreach ($_POST as $key => $value) {
+            if (in_array($key, ['action', 'handler', 'nonce'])) {
+                continue;
+            }
 
-        $this->_query_vars = self::base64Decode($_POST['data']);
+            $this->_query_vars[$key] = $value;
+        }
     }
 
     /**
@@ -251,33 +254,5 @@ abstract class AjaxHandler
         } else {
             die;
         }
-    }
-
-    /**
-     * @param array $data
-     * @return string
-     */
-    public static function base64Encode(array $data): string
-    {
-        $base64_string = json_encode($data);
-        $base64_string = base64_encode($base64_string);
-
-        return wp_slash($base64_string);
-    }
-
-    /**
-     * @param string $base64_string
-     * @return array
-     */
-    public static function base64Decode(string $base64_string): array
-    {
-        $data = null;
-
-        $base64_string = stripslashes($base64_string);
-        if ( $json_string = base64_decode($base64_string) ) {
-            $data = json_decode( $json_string );
-        }
-
-        return (array) $data;
     }
 }

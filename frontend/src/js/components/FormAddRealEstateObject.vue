@@ -1,13 +1,9 @@
 <template>
   <div v-if="urlCreated">
     <p class="mb-5">Объект успешно создан!</p>
-    <div class="row">
-      <div class="col-sm-6">
-        <a :href="urlCreated" class="btn btn-success">Просмотреть объект</a>
-      </div>
-      <div class="col-sm-6">
-        <button @click="recreateForm()" class="btn btn-primary">Добавить новый объект</button>
-      </div>
+    <div class="d-flex justify-content-center">
+      <a :href="urlCreated" class="btn btn-success mr-5">Просмотреть объект</a>
+      <button @click="recreateForm()" class="btn btn-primary">Добавить новый объект</button>
     </div>
   </div>
 
@@ -172,7 +168,8 @@ export default {
   },
 
   props: {
-    nonce: String
+    nonce: String,
+    author: Number,
   },
 
   data() {
@@ -213,7 +210,10 @@ export default {
     async sendForm(formData, { resetForm }) {
       const ajax = new WPAjax('real-estate-object', 'create', this.nonce)
       await ajax.load({
-        payload: formData,
+        payload: {
+          ...formData,
+          author: this.author
+        },
         onSuccess: (res) => {
           this.urlCreated = res.url;
 

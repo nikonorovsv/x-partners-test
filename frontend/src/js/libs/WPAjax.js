@@ -76,7 +76,9 @@ export class WPAjax {
     const { onSuccess, onError, payload } = props;
     try {
       if (payload !== undefined) {
-        this.setValue('data', this.base64encode(payload));
+        for (const key in payload) {
+          this.setValue(key, payload[key]);
+        }
       }
       const { success, data } = await this.send();
       if (success) {
@@ -87,25 +89,6 @@ export class WPAjax {
     } catch (e) {
       console.error(e);
     }
-  }
-
-  /**
-   * Encode object to base64 string
-   * @param obj
-   */
-  base64encode(obj) {
-    const json = JSON.stringify(obj);
-    return window.btoa(encodeURIComponent( json));
-  }
-
-  /**
-   * Decode base64 string to js object
-   * @param str
-   * @returns {any}
-   */
-  base64decode(str) {
-    const json = decodeURIComponent(window.atob(str));
-    return JSON.parse(json);
   }
 }
 
