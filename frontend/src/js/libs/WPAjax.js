@@ -5,12 +5,13 @@ export class WPAjax {
    *
    * @param handlerClass
    * @param handlerMethod
+   * @param nonce
    */
-  constructor(handlerClass, handlerMethod) {
+  constructor(handlerClass, handlerMethod, nonce) {
     this._request = {
       action: handlerClass,
       handler: handlerMethod,
-      nonce: document.body.dataset.nonce,
+      nonce,
     };
   }
 
@@ -94,7 +95,7 @@ export class WPAjax {
    */
   base64encode(obj) {
     const json = JSON.stringify(obj);
-    return window.btoa(json);
+    return window.btoa(encodeURIComponent( json));
   }
 
   /**
@@ -103,7 +104,7 @@ export class WPAjax {
    * @returns {any}
    */
   base64decode(str) {
-    const json = window.atob(str);
+    const json = decodeURIComponent(window.atob(str));
     return JSON.parse(json);
   }
 }

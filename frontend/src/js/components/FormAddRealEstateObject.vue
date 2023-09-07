@@ -1,11 +1,13 @@
 <template>
   <div v-if="urlCreated">
-    <p>Объект успешно создан!</p>
-    <div>
-      <a :href="urlCreated" class="btn btn-success">Просмотреть объект</a>
-    </div>
-    <div>
-      <button @click="recreateForm()" class="btn btn-primary">Добавить новый объект</button>
+    <p class="mb-5">Объект успешно создан!</p>
+    <div class="row">
+      <div class="col-sm-6">
+        <a :href="urlCreated" class="btn btn-success">Просмотреть объект</a>
+      </div>
+      <div class="col-sm-6">
+        <button @click="recreateForm()" class="btn btn-primary">Добавить новый объект</button>
+      </div>
     </div>
   </div>
 
@@ -33,7 +35,7 @@
     <div class="form-group">
       <label for="objectPostDesc">Описание</label>
       <v-field v-slot="{ field, error }" name="desc">
-        <textarea id="objectPostDesc" v-bind="field" class="form-control" :class="error ? 'is-invalid' : null" rows="3"></textarea>
+        <textarea id="objectPostDesc" v-bind="field" class="form-control" :class="error ? 'is-invalid' : null" rows="3" />
       </v-field>
       <v-error
           :message="errors.desc ? errors.desc : null"
@@ -51,6 +53,7 @@
               name="area"
               type="number"
               step="0.1"
+              min="0"
           />
           <v-error
               :message="errors.area ? errors.area : null"
@@ -68,6 +71,7 @@
               name="living_area"
               type="number"
               step="0.1"
+              min="0"
           />
           <v-error
               :message="errors.living_area ? errors.living_area : null"
@@ -101,6 +105,7 @@
             :class="errors.floor ? 'is-invalid' : null"
             name="floor"
             type="number"
+            min="1"
         />
         <v-error
             :message="errors.floor ? errors.floor : null"
@@ -118,6 +123,7 @@
           name="price"
           type="number"
           step="1000"
+          min="0"
       />
       <v-error
           :message="errors.price ? errors.price : null"
@@ -134,7 +140,7 @@ import WPAjax from '../libs/WPAjax'
 import { defineRule, configure, Field, Form } from 'vee-validate'
 import { required, min_value, max_value } from '@vee-validate/rules'
 import { localize } from '@vee-validate/i18n'
-import mitt from 'mitt'
+//import mitt from 'mitt'
 
 import FormErrorMessage from './FormErrorMessage.vue'
 
@@ -157,12 +163,16 @@ configure({
   validateOnModelUpdate: false,
 })
 
-const emitter = mitt()
+// const emitter = mitt()
 export default {
   components: {
     VForm: Form,
     VField: Field,
     VError: FormErrorMessage,
+  },
+
+  props: {
+    nonce: String
   },
 
   data() {
@@ -201,7 +211,7 @@ export default {
 
   methods: {
     async sendForm(formData, { resetForm }) {
-      const ajax = new WPAjax('real-estate-object', 'create')
+      const ajax = new WPAjax('real-estate-object', 'create', this.nonce)
       await ajax.load({
         payload: formData,
         onSuccess: (res) => {
