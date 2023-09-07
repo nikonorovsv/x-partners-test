@@ -1,4 +1,7 @@
 <?php
+
+defined( 'ABSPATH' ) || exit;
+
 // Декларируем параметры
 extract([
     'nonce' => null
@@ -15,7 +18,8 @@ extract([
         the_vue_app([
             'name'  => 'FormAddRealEstateObject',
             'props' => [
-                'nonce' => $nonce
+                'nonce'  => $nonce,
+                'author' => get_current_user_id()
             ],
         ]); ?>
     </div>

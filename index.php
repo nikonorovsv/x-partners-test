@@ -55,10 +55,15 @@ $container = get_theme_mod( 'understrap_container_type' );
                         </h2>
                     </header>
 
-                    // Импровизированная рендер функция, можно передавать параметры явно
-                    <?= render('main-form', [
-                        'nonce' => wp_create_nonce()
-                    ]); ?>
+                    <?php
+                    if (is_user_logged_in()) {
+                        // Импровизированная рендер функция, можно передавать параметры явно
+                        echo render('main-form', [
+                            'nonce' => \theme\core\AjaxHandler::getNonce()
+                        ]);
+                    } else {
+                        echo '<p>Вы не авторизованы..</p>';
+                    } ?>
                 </section>
             </main>
 
